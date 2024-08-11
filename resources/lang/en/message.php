@@ -8,6 +8,9 @@ return [
     'email_invalid' => 'Email is invalid',
     'username_exist' => 'Username already exists',
     'email_exist' => 'Email already exists',
+    'password_min' => 'Password must be at least :min characters',
+    'password_max' => 'Password must be at most :max characters',
+    'password_confirm' => 'Password confirmation does not match',
 
     'user_add_success' => 'User added successfully',
     'user_edit_success' => 'User edited successfully',

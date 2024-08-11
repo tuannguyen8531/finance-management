@@ -13,8 +13,10 @@ class UserLiveDetail extends Component
     public $name;
     public $username;
     public $email;
-    public $password;
     public $balance;
+    public $password;
+    public $newPassword;
+    public $confirmPassword;
 
     public function rules() {
         return [
@@ -32,8 +34,10 @@ class UserLiveDetail extends Component
                     return $query->where('deleted_flg', DELETED_DISABLED);
                 })->ignore($this->user->id),
             ],
-            'password' => '',
             'balance' => 'required',
+            'password' => 'nullable|min:3|max:16',
+            'newPassword' => 'nullable|min:3|max:16',
+            'confirmPassword' => 'nullable|same:newPassword',
         ];
     }
 
@@ -46,6 +50,11 @@ class UserLiveDetail extends Component
             'email.unique' => __('message.email_exist'),
             'email.email' => __('message.email_invalid'),
             'balance.required' => __('message.field_required'),
+            'password.min' => __('message.password_min'),
+            'password.max' => __('message.password_max'),
+            'newPassword.min' => __('message.password_min'),
+            'newPassword.max' => __('message.password_max'),
+            'confirmPassword.same' => __('message.password_confirm'),
         ];
     }
 
@@ -70,6 +79,17 @@ class UserLiveDetail extends Component
 
     public function save() {
         $this->validate();
+
+        if (isset($this->newPassword) && !empty($this->newPassword)) {
+            if (empty($this->password) || !password_verify($this->password, $this->user->password)) {
+                return redirect()->route('user.detail', ['id' => $this->user->id])->with([
+                    'status' => 'danger',
+                    'message' => __('message.password_confirm'),
+                ]);
+            }
+
+            $this->password = $this->newPassword;
+        }
 
         $input = [
             'name' => $this->name,
