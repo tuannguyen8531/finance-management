@@ -22,5 +22,10 @@ Route::middleware('checklogin')->group(function () {
     // User
     Route::get('/user', \App\Http\Livewire\User\UserLive::class)->name('user');
     Route::get('/user/add', \App\Http\Livewire\User\UserLiveAdd::class)->name('user.add');
-    Route::get('/user/{id}', \App\Http\Livewire\User\UserLiveDetail::class)->name('user.detail');
+    Route::get('/user/{id}', \App\Http\Livewire\User\UserLiveDetail::class)->name('user.edit');
+
+    // Category
+    Route::get('/category', \App\Http\Livewire\Category\CategoryLive::class)->name('category');
+    Route::get('/category/add', \App\Http\Livewire\Category\CategoryLiveAdd::class)->name('category.add');
+    Route::get('/category/{id}', \App\Http\Livewire\Category\CategoryLiveDetail::class)->name('category.edit');
 });

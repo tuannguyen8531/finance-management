@@ -23,14 +23,14 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Management
+        Log
     </div>
 
     <!-- Nav Item - History Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHistory"
             aria-expanded="true" aria-controls="collapseHistory">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-fw fa-calendar"></i>
             <span>History</span>
         </a>
         <div id="collapseHistory" class="collapse" aria-labelledby="headingHistory" data-parent="#accordionSidebar">
@@ -39,6 +39,14 @@
             </div>
         </div>
     </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Management
+    </div>
 
     <!-- Nav Item - Database Collapse Menu -->
     <li class="nav-item">
@@ -61,7 +69,7 @@
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseProfile"
             aria-expanded="true" aria-controls="collapseProfile">
             <i class="fas fa-fw fa-user"></i>
-            <span>Profile</span>
+            <span>Accounts</span>
         </a>
         <div id="collapseProfile" class="collapse" aria-labelledby="headingProfile"
             data-parent="#accordionSidebar">

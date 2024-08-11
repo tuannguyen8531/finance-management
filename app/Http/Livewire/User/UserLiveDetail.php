@@ -64,6 +64,9 @@ class UserLiveDetail extends Component
 
         $objUser = new UserRepository();
         $this->user = $objUser->getUserById($id);
+        if (!$this->user) {
+            abort(404);
+        }
 
         $this->name = $this->user->name;
         $this->username = $this->user->username;
@@ -82,7 +85,7 @@ class UserLiveDetail extends Component
 
         if (isset($this->newPassword) && !empty($this->newPassword)) {
             if (empty($this->password) || !password_verify($this->password, $this->user->password)) {
-                return redirect()->route('user.detail', ['id' => $this->user->id])->with([
+                return redirect()->route('user.edit', ['id' => $this->user->id])->with([
                     'status' => 'danger',
                     'message' => __('message.password_confirm'),
                 ]);
