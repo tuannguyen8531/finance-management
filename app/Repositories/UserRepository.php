@@ -39,8 +39,11 @@ class UserRepository
             'name' => trim($input['name']),
             'username' => trim($input['username']),
             'email' => trim($input['email']),
-            'password' => Hash::make($input['password']),
         ];
+
+        if (trim($input['password']) != '') {
+            $data['password'] = Hash::make($input['password']);
+        }
 
         if (trim($input['id']) == 0) {
             $objUser->insertUser($data);

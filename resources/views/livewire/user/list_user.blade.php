@@ -41,7 +41,7 @@
                                     @endif
                                 </td>
                                 <td class="text-center">
-                                    <a href="" class="btn btn-primary btn-sm px-3">Edit</a>
+                                    <a href="{{ route('user.detail', $user->id) }}" class="btn btn-success btn-sm px-3">Edit</a>
                                     <a class="btn btn-danger btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-idDelete="{{ $user->id }}" data-title="{{ $user->name }}">Delete</a>
                                 </td>
                             </tr>

@@ -22,4 +22,5 @@ Route::middleware('checklogin')->group(function () {
     // User
     Route::get('/user', \App\Http\Livewire\User\UserLive::class)->name('user');
     Route::get('/user/add', \App\Http\Livewire\User\UserLiveAdd::class)->name('user.add');
+    Route::get('/user/{id}', \App\Http\Livewire\User\UserLiveDetail::class)->name('user.detail');
 });

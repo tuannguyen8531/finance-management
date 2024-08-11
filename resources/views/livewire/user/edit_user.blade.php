@@ -3,7 +3,7 @@
 
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Create user</h6>
+            <h6 class="m-0 font-weight-bold text-primary">User detail</h6>
         </div>
         <div class="card-body">
             <form wire:submit.prevent="save">
@@ -11,28 +11,28 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <input type="text" wire:model="name" class="form-control" id="name" placeholder="Enter name">
+                            <input type="text" wire:model="name" class="form-control" id="name" value="{{ $user->name }}">
                             @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="username">Username</label>
-                            <input type="text" wire:model="username" class="form-control" id="username" placeholder="Enter username">
+                            <input type="text" wire:model="username" class="form-control" id="username" name="username">
                             @error('username') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="text" wire:model="email" class="form-control" id="email" placeholder="Enter email">
+                            <input type="text" wire:model="email" class="form-control" id="email" name="email">
                             @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" wire:model="password" class="form-control" id="password" placeholder="Enter password">
+                            <input type="password" wire:model="password" class="form-control" id="password" name="password">
                             @error('password') <span class="text-danger">{{ $message }}</span> @enderror
                         </div>
                     </div>
