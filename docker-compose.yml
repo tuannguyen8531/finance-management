@@ -1,0 +1,62 @@
+services:
+  app:
+    build:
+      args:
+        user: sevenths
+        uid: 1000
+      context: ./
+      dockerfile: dockerfile
+    image: finance
+    container_name: finance-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - finance
+
+  db:
+    image: mysql:5.7
+    ports:
+      - 3306
+    container_name: finance-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+      - ./database/db:/var/lib/mysql
+    networks:
+      - finance
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8188:80
+    environment:
+      PMA_HOST: db
+      # PMA_USER: ${DB_USERNAME}
+      PMA_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - finance
+
+  nginx:
+    image: nginx:alpine
+    container_name: finance-nginx
+    restart: unless-stopped
+    ports:
+      - 8187:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - finance
+
+networks:
+  finance:
+    driver: bridge
+
