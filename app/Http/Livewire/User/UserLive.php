@@ -8,12 +8,13 @@ use Livewire\Component;
 class UserLive extends Component
 {
     public $title;
+    public $users;
+    
 
     public function mount()
     {
         $this->title = __('title.list_user');
     }
-    public $users;
 
     public function render()
     {
@@ -21,5 +22,16 @@ class UserLive extends Component
         $this->users = $objUser->getListUsers();
 
         return view('livewire.user.list_user');
+    }
+
+    public function delete($id)
+    {
+        $objUser = new UserRepository();
+        $result = $objUser->deleteUser($id);
+
+        return redirect()->route('user')->with([
+            'status' => $result['status'],
+            'message' => $result['message'],
+        ]);
     }
 }

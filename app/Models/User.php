@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -46,30 +47,56 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getListUsers()
+    function getListUsers()
     {
         $result = User::where($this->table . '.deleted_flg', DELETED_DISABLED)
-            ->orderBy($this->table . '.id', 'desc')
-            ->get();
+        ->orderBy($this->table . '.id', 'desc')
+        ->get();
         
         return $result;
     }
 
-    public function getUserById($id)
+    function getUserById($id)
     {
         $result = User::where($this->table . '.id', $id)
-            ->where($this->table . '.deleted_flg', DELETED_DISABLED)
-            ->first();
+        ->where($this->table . '.deleted_flg', DELETED_DISABLED)
+        ->first();
         
         return $result;
     }
 
-    public function getUserByUserName($username)
+    function getUserByUserName($username)
     {
         $result = User::where($this->table . '.username', $username)
-            ->where($this->table . '.deleted_flg', DELETED_DISABLED)
-            ->first();
+        ->where($this->table . '.deleted_flg', DELETED_DISABLED)
+        ->first();
         
         return $result;
+    }
+
+    function insertUser($data)
+    {
+        $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
+        return DB::table($this->table)->insert($data);
+    }
+
+    function updateUser($id, $data)
+    {
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
+        return DB::table($this->table)
+        ->where('id', $id)
+        ->update($data);
+    }
+
+    function deleteUser($id)
+    {
+        $data['deleted_flg'] = DELETED_ENABLED;
+        
+        DB::table($this->table)
+        ->where('id', $id)
+        ->update($data);
     }
 }

@@ -10,8 +10,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">List user</h6>
-            <a href="{{ route('user.add') }}" class="btn btn-primary btn-sm float-right">Add User</a>
+            <h6 class="m-0 font-weight-bold text-primary">List category</h6>
+            <a href="{{ route('category.add') }}" class="btn btn-primary btn-sm float-right">Add Category</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">
@@ -20,25 +20,22 @@
                         <tr>
                             <th class="text-center" style="width: 5% !important;">#</th>
                             <th style="width: 15%;">Name</th>
-                            <th style="width: 15%;">Username</th>
-                            <th style="width: 20%;">Email</th>
-                            <th style="width: 20%;">Balance</th>
-                            <th>Role</th>
+                            <th style="width: 10%;">Type</th>
+                            <th style="width: 60%;">Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($categories as $category)
                             <tr>
-                                <td class="text-center">{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>{{ number_format($user->balance) }} VND</td>
-                                <td>{{ getRole($user->role) }}</td>
+                                <td class="text-center">{{ $category->id }}</td>
+                                <td>{{ $category->name }}</td>
+                                <td>{{ getCategoryType($category->type) }}</td>
+                                <td>{{ $category->description }}</td>
+                                </td>
                                 <td class="text-center">
-                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success btn-sm px-3">Edit</a>
-                                    <a class="btn btn-danger btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-idDelete="{{ $user->id }}" data-title="{{ $user->name }}">Delete</a>
+                                    <a href="{{ route('category.edit', $category->id) }}" class="btn btn-success btn-sm px-3">Edit</a> 
+                                    <a class="btn btn-danger btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-idDelete="{{ $category->id }}" data-title="{{ $category->name }}">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
