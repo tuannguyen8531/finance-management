@@ -31,6 +31,13 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
+                            <label for="balance">Balance</label>
+                            <input type="number" min="0" wire:model="balance" class="form-control" id="balance" name="balance">
+                            @error('balance') <span class="text-danger">{{ $message }}</span> @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                             <label for="password">Password</label>
                             <input type="password" wire:model="password" class="form-control" id="password" name="password">
                             @error('password') <span class="text-danger">{{ $message }}</span> @enderror

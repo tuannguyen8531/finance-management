@@ -2,6 +2,9 @@
 
 return [
     'field_required' => 'Field is required',
+    'field_numeric' => 'Field must be numeric',
+    'field_min' => 'Field must be greater than :min',
+    'field_max' => 'Field must be less than :max',
     'email_invalid' => 'Email is invalid',
     'username_exist' => 'Username already exists',
     'email_exist' => 'Email already exists',

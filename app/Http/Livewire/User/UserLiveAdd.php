@@ -12,6 +12,7 @@ class UserLiveAdd extends Component {
     public $username;
     public $email;
     public $password;
+    public $balance;
 
     public function rules() {
         return [
@@ -30,18 +31,22 @@ class UserLiveAdd extends Component {
                 }),
             ],
             'password' => 'required',
+            'balance' => 'required|numeric|min:0',
         ];
     }
 
     public function messages() {
         return [
-            'name.required' => __('msg.field_required'),
-            'username.required' => __('msg.field_required'),
-            'username.unique' => __('msg.username_exist'),
-            'email.required' => __('msg.field_required'),
-            'email.unique' => __('msg.email_exist'),
-            'email.email' => __('msg.email_invalid'),
-            'password.required' => __('msg.field_required'),
+            'name.required' => __('message.field_required'),
+            'username.required' => __('message.field_required'),
+            'username.unique' => __('message.username_exist'),
+            'email.required' => __('message.field_required'),
+            'email.unique' => __('message.email_exist'),
+            'email.email' => __('message.email_invalid'),
+            'password.required' => __('message.field_required'),
+            'balance.required' => __('message.field_required'),
+            'balance.numeric' => __('message.field_numeric'),
+            'balance.min' => __('message.field_min', ['min' => 0]),
         ];
     }
 
@@ -61,6 +66,7 @@ class UserLiveAdd extends Component {
             'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password,
+            'balance' => $this->balance,
             'id' => 0,
         ];
 

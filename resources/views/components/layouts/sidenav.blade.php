@@ -49,7 +49,7 @@
         </a>
         <div id="collapseDatabase" class="collapse" aria-labelledby="headingDatabase" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
-                <a class="collapse-item" href="">Category</a>
+                <a class="collapse-item" href="{{ route('category') }}">Category</a>
                 <a class="collapse-item" href="">Budgets</a>
                 <a class="collapse-item" href="">Tags</a>
             </div>

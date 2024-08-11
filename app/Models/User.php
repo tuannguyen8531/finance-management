@@ -47,7 +47,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getListUsers()
+    function getListUsers()
     {
         $result = User::where($this->table . '.deleted_flg', DELETED_DISABLED)
         ->orderBy($this->table . '.id', 'desc')
@@ -56,7 +56,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public function getUserById($id)
+    function getUserById($id)
     {
         $result = User::where($this->table . '.id', $id)
         ->where($this->table . '.deleted_flg', DELETED_DISABLED)
@@ -65,7 +65,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public function getUserByUserName($username)
+    function getUserByUserName($username)
     {
         $result = User::where($this->table . '.username', $username)
         ->where($this->table . '.deleted_flg', DELETED_DISABLED)
@@ -74,7 +74,7 @@ class User extends Authenticatable
         return $result;
     }
 
-    public function insertUser($data)
+    function insertUser($data)
     {
         $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();
         $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
@@ -82,7 +82,7 @@ class User extends Authenticatable
         return DB::table($this->table)->insert($data);
     }
 
-    public function updateUser($id, $data)
+    function updateUser($id, $data)
     {
         $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
         
@@ -91,7 +91,7 @@ class User extends Authenticatable
         ->update($data);
     }
 
-    public function deleteUser($id)
+    function deleteUser($id)
     {
         $data['deleted_flg'] = DELETED_ENABLED;
         

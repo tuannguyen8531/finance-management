@@ -39,6 +39,7 @@ class UserRepository
             'name' => trim($input['name']),
             'username' => trim($input['username']),
             'email' => trim($input['email']),
+            'balance' => trim($input['balance']),
         ];
 
         if (trim($input['password']) != '') {
@@ -49,13 +50,13 @@ class UserRepository
             $objUser->insertUser($data);
             $result = [
                 'status' => 'success',
-                'message' => __('messages.user_add_success'),
+                'message' => __('message.user_add_success'),
             ];
         } else {
             $objUser->updateUser($input['id'], $data);
             $result = [
                 'status' => 'success',
-                'message' => __('messages.user_edit_success'),
+                'message' => __('message.user_edit_success'),
             ];
         }
 
@@ -69,7 +70,7 @@ class UserRepository
 
         $result = [
             'status' => 'success',
-            'message' => __('messages.user_delete_success'),
+            'message' => __('message.user_delete_success'),
         ];
 
         return $result;

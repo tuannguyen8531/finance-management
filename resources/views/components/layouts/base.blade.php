@@ -37,12 +37,31 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
-    <!-- <script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
+    {{-- <script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
-    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script> -->
+    <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script> --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#deleteModal').on('show.bs.modal', function (event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('iddelete');
+                var title = button.data('title');
+                var modal = $(this);
+                modal.find('.modal-body #nameDelete').text(title);
+                modal.find('.modal-footer #confirmDelete').attr('wire:click', 'delete(' + id + ')');
+            });
+
+            if ($('#alert-message').length) {
+                setTimeout(function () {
+                    $('#alert-message').fadeOut();
+                }, 3000);
+            }
+        });
+    </script>
 
     @yield('javascript')
 </body>

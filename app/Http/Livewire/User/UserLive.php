@@ -8,12 +8,13 @@ use Livewire\Component;
 class UserLive extends Component
 {
     public $title;
+    public $users;
+    
 
     public function mount()
     {
         $this->title = __('title.list_user');
     }
-    public $users;
 
     public function render()
     {

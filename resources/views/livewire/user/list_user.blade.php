@@ -19,9 +19,10 @@
                     <thead>
                         <tr>
                             <th class="text-center" style="width: 5% !important;">#</th>
-                            <th style="width: 20%;">Name</th>
-                            <th style="width: 20%;">Username</th>
-                            <th style="width: 30%;">Email</th>
+                            <th style="width: 15%;">Name</th>
+                            <th style="width: 15%;">Username</th>
+                            <th style="width: 20%;">Email</th>
+                            <th style="width: 20%;">Balance</th>
                             <th>Role</th>
                             <th>Action</th>
                         </tr>
@@ -33,13 +34,8 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->username }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>
-                                    @if ($user->role == ROLE_ADMIN)
-                                        Admin
-                                    @else
-                                        User
-                                    @endif
-                                </td>
+                                <td>{{ number_format($user->balance) }} VND</td>
+                                <td>{{ getRole($user->role) }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('user.detail', $user->id) }}" class="btn btn-success btn-sm px-3">Edit</a>
                                     <a class="btn btn-danger btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-idDelete="{{ $user->id }}" data-title="{{ $user->name }}">Delete</a>
@@ -54,18 +50,3 @@
 
     @include('components.modals.delete')
 </div>
-
-@section('javascript')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            $('#deleteModal').on('show.bs.modal', function (event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('iddelete');
-                var title = button.data('title');
-                var modal = $(this);
-                modal.find('.modal-body #nameDelete').text(title);
-                modal.find('.modal-footer #confirmDelete').attr('wire:click', 'delete(' + id + ')');
-            });
-        });
-    </script>
-@endsection

@@ -10,11 +10,11 @@ class UserLiveDetail extends Component
 {
     public $title;
     public $user;
-    public $user_id;
     public $name;
     public $username;
     public $email;
     public $password;
+    public $balance;
 
     public function rules() {
         return [
@@ -33,17 +33,19 @@ class UserLiveDetail extends Component
                 })->ignore($this->user->id),
             ],
             'password' => '',
+            'balance' => 'required',
         ];
     }
 
     public function messages() {
         return [
-            'name.required' => __('msg.field_required'),
-            'username.required' => __('msg.field_required'),
-            'username.unique' => __('msg.username_exist'),
-            'email.required' => __('msg.field_required'),
-            'email.unique' => __('msg.email_exist'),
-            'email.email' => __('msg.email_invalid'),
+            'name.required' => __('message.field_required'),
+            'username.required' => __('message.field_required'),
+            'username.unique' => __('message.username_exist'),
+            'email.required' => __('message.field_required'),
+            'email.unique' => __('message.email_exist'),
+            'email.email' => __('message.email_invalid'),
+            'balance.required' => __('message.field_required'),
         ];
     }
 
@@ -52,12 +54,12 @@ class UserLiveDetail extends Component
         $this->title = __('title.detail_user');
 
         $objUser = new UserRepository();
-        $this->user_id = $id;
         $this->user = $objUser->getUserById($id);
 
         $this->name = $this->user->name;
         $this->username = $this->user->username;
         $this->email = $this->user->email;
+        $this->balance = $this->user->balance;
         $this->password = '';
     }
 
@@ -74,6 +76,7 @@ class UserLiveDetail extends Component
             'username' => $this->username,
             'email' => $this->email,
             'password' => $this->password ?? null,
+            'balance' => $this->balance,
             'id' => $this->user->id,
         ];
 

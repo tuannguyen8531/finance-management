@@ -13,7 +13,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" id="confirmDelete" wire:click="delete({{ $user->id }})">Delete</a>
+                <a class="btn btn-primary" id="confirmDelete" wire:click="">Delete</a>
             </div>
         </div>
     </div>
