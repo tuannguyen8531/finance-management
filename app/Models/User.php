@@ -6,6 +6,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -49,8 +50,8 @@ class User extends Authenticatable
     public function getListUsers()
     {
         $result = User::where($this->table . '.deleted_flg', DELETED_DISABLED)
-            ->orderBy($this->table . '.id', 'desc')
-            ->get();
+        ->orderBy($this->table . '.id', 'desc')
+        ->get();
         
         return $result;
     }
@@ -58,8 +59,8 @@ class User extends Authenticatable
     public function getUserById($id)
     {
         $result = User::where($this->table . '.id', $id)
-            ->where($this->table . '.deleted_flg', DELETED_DISABLED)
-            ->first();
+        ->where($this->table . '.deleted_flg', DELETED_DISABLED)
+        ->first();
         
         return $result;
     }
@@ -67,9 +68,35 @@ class User extends Authenticatable
     public function getUserByUserName($username)
     {
         $result = User::where($this->table . '.username', $username)
-            ->where($this->table . '.deleted_flg', DELETED_DISABLED)
-            ->first();
+        ->where($this->table . '.deleted_flg', DELETED_DISABLED)
+        ->first();
         
         return $result;
+    }
+
+    public function insertUser($data)
+    {
+        $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
+        return DB::table($this->table)->insert($data);
+    }
+
+    public function updateUser($id, $data)
+    {
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
+        return DB::table($this->table)
+        ->where('id', $id)
+        ->update($data);
+    }
+
+    public function deleteUser($id)
+    {
+        $data['deleted_flg'] = DELETED_ENABLED;
+        
+        DB::table($this->table)
+        ->where('id', $id)
+        ->update($data);
     }
 }

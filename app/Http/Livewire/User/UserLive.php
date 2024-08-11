@@ -22,4 +22,15 @@ class UserLive extends Component
 
         return view('livewire.user.list_user');
     }
+
+    public function delete($id)
+    {
+        $objUser = new UserRepository();
+        $result = $objUser->deleteUser($id);
+
+        return redirect()->route('user')->with([
+            'status' => $result['status'],
+            'message' => $result['message'],
+        ]);
+    }
 }

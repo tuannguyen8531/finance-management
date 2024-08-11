@@ -18,5 +18,8 @@ Route::get('/logout', [\App\Http\Livewire\Auth\Login::class, 'logout'])->name('l
 
 Route::middleware('checklogin')->group(function () {
     Route::get('/', \App\Http\Livewire\DashboardLive::class)->name('dashboard');
+
+    // User
     Route::get('/user', \App\Http\Livewire\User\UserLive::class)->name('user');
+    Route::get('/user/add', \App\Http\Livewire\User\UserLiveAdd::class)->name('user.add');
 });
