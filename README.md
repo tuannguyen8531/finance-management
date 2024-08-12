@@ -2,7 +2,7 @@
 
 ```bash
 docker compose up -d --build
-docker compose exec -it finance-app composer install
-docker compose exec -it finance-app composer dump-autoload
-docker compose exec -it finance-app php artisan key:generate
+docker exec finance-app composer install
+docker exec finance-app composer dump-autoload
+docker exec finance-app php artisan key:generate
 ```
