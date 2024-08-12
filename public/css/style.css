@@ -1,0 +1,9 @@
+.chakra-link {
+    color: #858796;
+    text-decoration: none;
+}
+
+.chakra-link:hover {
+    color: #5a5c69;
+    text-decoration: none;
+}

@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\BaseModel as Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Notifications\Notifiable;
+
+class Budget extends Model 
+{
+    use HasFactory, Notifiable;
+
+    protected $table = 'budgets';
+    public $timestamps = true;
+
+    protected $fillable = [
+        'category_id',
+        'user_id',
+        'amount',
+        'period',
+        'note',
+    ];
+
+    function getListBudgets()
+    {
+        $result = DB::table($this->table)
+        ->join('categories', 'budgets.category_id', '=', 'categories.id')
+        ->join('users', 'budgets.user_id', '=', 'users.id')
+        ->where('budgets.deleted_flg', DELETED_DISABLED)
+        ->orderBy('budgets.id', 'desc')
+        ->select(['budgets.*', 'categories.name as category_name', 'users.name as user_name', 'users.username as user_username'])
+        ->get();
+        
+        return $result;
+    }
+
+    function getBudgetById($id)
+    {
+        $result = DB::table($this->table)
+        ->where('id', $id)
+        ->where('deleted_flg', DELETED_DISABLED)
+        ->first();
+        
+        return $result;
+    }
+
+    function getBudgetByUserId($userId)
+    {
+        $result = DB::table($this->table)
+        ->join('categories', 'budgets.category_id', '=', 'categories.id')
+        ->where('user_id', $userId)
+        ->where('budgets.deleted_flg', DELETED_DISABLED)
+        ->orderBy('budgets.id', 'desc')
+        ->select(['budgets.*', 'categories.name as category_name'])
+        ->get();
+
+        return $result;
+    }
+
+    function getBudgetByCategoryId($categoryId)
+    {
+        $result = DB::table($this->table)
+        ->where('category_id', $categoryId)
+        ->where('deleted_flg', DELETED_DISABLED)
+        ->orderBy('id', 'desc')
+        ->get();
+        
+        return $result;
+    }
+
+    function getBudgetByUserIdAndCategoryId($userId, $categoryId)
+    {
+        $result = DB::table($this->table)
+        ->where('user_id', $userId)
+        ->where('category_id', $categoryId)
+        ->where('deleted_flg', DELETED_DISABLED)
+        ->orderBy('id', 'desc')
+        ->first();
+        
+        return $result;
+    }
+
+    function getBudgetByUsernameAndCategoryId($username, $categoryId)
+    {
+        $result = DB::table($this->table)
+        ->join('users', 'budgets.user_id', '=', 'users.id')
+        ->where('users.username', $username)
+        ->where('category_id', $categoryId)
+        ->where('budgets.deleted_flg', DELETED_DISABLED)
+        ->orderBy('budgets.id', 'desc')
+        ->first();
+        
+        return $result;
+    }
+
+    function insertBudget($data)
+    {
+        $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
+        return DB::table($this->table)->insert($data);
+    }
+
+    function updateBudget($id, $data)
+    {
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
+        return DB::table($this->table)
+        ->where('id', $id)
+        ->update($data);
+    }
+
+    function deleteBudget($id)
+    {
+        return DB::table($this->table)
+        ->where('id', $id)
+        ->update(['deleted_flg' => DELETED_ENABLED]);
+    }
+}

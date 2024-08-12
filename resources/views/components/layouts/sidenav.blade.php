@@ -23,19 +23,35 @@
 
     <!-- Heading -->
     <div class="sidebar-heading">
-        Log
+        History
     </div>
 
     <!-- Nav Item - History Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseHistory"
             aria-expanded="true" aria-controls="collapseHistory">
-            <i class="fas fa-fw fa-calendar"></i>
-            <span>History</span>
+            <i class="fas fa-fw fa-shopping-cart"></i>
+            <span>Tracking</span>
         </a>
         <div id="collapseHistory" class="collapse" aria-labelledby="headingHistory" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="">Transactions</a>
+                <a class="collapse-item" href="{{ route('budget') }}">Budgets</a>
+                <a class="collapse-item" href="">Debt Ledger</a>
+            </div>
+        </div>
+    </li>
+
+    <!-- Nav Item - Summary Collapse Menu -->
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseSummary"
+            aria-expanded="true" aria-controls="collapseSummary">
+            <i class="fas fa-fw fa-book"></i>
+            <span>Summary</span>
+        </a>
+        <div id="collapseSummary" class="collapse" aria-labelledby="headingSummary" data-parent="#accordionSidebar">
+            <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="">Monthly Summary</a>
             </div>
         </div>
     </li>
@@ -58,7 +74,6 @@
         <div id="collapseDatabase" class="collapse" aria-labelledby="headingDatabase" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <a class="collapse-item" href="{{ route('category') }}">Category</a>
-                <a class="collapse-item" href="">Budgets</a>
                 <a class="collapse-item" href="">Tags</a>
             </div>
         </div>

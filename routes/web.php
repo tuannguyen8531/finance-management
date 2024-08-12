@@ -28,4 +28,7 @@ Route::middleware('checklogin')->group(function () {
     Route::get('/category', \App\Http\Livewire\Category\CategoryLive::class)->name('category');
     Route::get('/category/add', \App\Http\Livewire\Category\CategoryLiveAdd::class)->name('category.add');
     Route::get('/category/{id}', \App\Http\Livewire\Category\CategoryLiveDetail::class)->name('category.edit');
+
+    // Budget
+    Route::get('/budget', \App\Http\Livewire\Budget\BudgetLive::class)->name('budget');
 });
