@@ -7,13 +7,76 @@
         </div>
     @endif
 
+    <!-- Filter -->
+    @if (Auth::guard('user')->user()->role == ROLE_ADMIN)
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Filter</h6>
+            </div>
+            <div class="card-body">
+                <form wire:submit.prevent="filter" wire:reset="clear">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select class="form-control" name="category" id="category" wire:model="search.category">
+                                    <option value="">All</option>
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>User</label>
+                                <input type="text" class="form-control" name="user" id="user" wire:model="search.user">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>Period</label>
+                                <select class="form-control" name="period" id="period" wire:model="search.period">
+                                    <option value="">All</option>
+                                    @foreach (PERIOD as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>From amount (VND)</label>
+                                <input type="number" class="form-control" name="amount_from" min="0" wire:model="search.amount_from">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label>to (VND)</label>
+                                <input type="number" class="form-control" name="amount_to" min="0" wire:model="search.amount_to">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex align-items-center justify-content-between">
             <h6 class="m-0 font-weight-bold text-primary">List budget</h6>
             <a class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#budgetModal" data-title="add">Add Budget</a>
         </div>
-        <div class="card-body">
+        <div class="card-body" wire:ignore>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     @if (Auth::guard('user')->user()->role != ROLE_ADMIN)

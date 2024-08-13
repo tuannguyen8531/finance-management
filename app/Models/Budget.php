@@ -22,14 +22,33 @@ class Budget extends Model
         'note',
     ];
 
-    function getListBudgets()
+    function getListBudgets($input_search)
     {
         $result = DB::table($this->table)
         ->join('categories', 'budgets.category_id', '=', 'categories.id')
         ->join('users', 'budgets.user_id', '=', 'users.id')
         ->where('budgets.deleted_flg', DELETED_DISABLED)
-        ->orderBy('budgets.id', 'desc')
-        ->select(['budgets.*', 'categories.name as category_name', 'users.name as user_name', 'users.username as user_username'])
+        ->where('categories.deleted_flg', DELETED_DISABLED)
+        ->where('users.deleted_flg', DELETED_DISABLED);
+        
+        if (!empty($input_search['category'])) {
+            $result = $result->where('categories.id', $input_search['category']);
+        }
+        if (!empty($input_search['period'])) {
+            $result = $result->where('budgets.period', $input_search['period']);
+        }
+        if (!empty($input_search['user'])) {
+            $result = $result->where('users.username', 'like', '%' . $input_search['user'] . '%');
+        }
+        if (!empty($input_search['amount_from'])) {
+            $result = $result->where('budgets.amount', '>=', $input_search['amount_from']);
+        }
+        if (!empty($input_search['amount_to'])) {
+            $result = $result->where('budgets.amount', '<=', $input_search['amount_to']);
+        }
+
+        $result = $result->orderBy('budgets.id', 'desc')
+        ->select(['budgets.*', 'categories.name as category_name', 'users.username as user_username'])
         ->get();
         
         return $result;

@@ -6,10 +6,10 @@ use App\Models\Budget;
 
 class BudgetRepository
 {
-    public function getListBudgets()
+    public function getListBudgets($input_search)
     {
         $objBudget = new Budget();
-        $result = $objBudget->getListBudgets();
+        $result = $objBudget->getListBudgets($input_search);
 
         return $result;
     }

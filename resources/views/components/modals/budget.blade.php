@@ -46,12 +46,10 @@
                         <div class="form-group">
                                 <label>Period</label>
                                 <select class="form-control" wire:model="period">
-                                    <option value="{{ null }}">Select period</option>
-                                    <option value="0">Daily</option>
-                                    <option value="1">Weekly</option>
-                                    <option value="2">Monthly</option>
-                                    <option value="3">Annually</option>
-                                    <option value="4">One-time</option>
+                                    <option value="">Select period</option>
+                                    @foreach (PERIOD as $key => $value)
+                                        <option value="{{ $key }}">{{ $value }}</option>
+                                    @endforeach
                                 </select>
                                 @error('period') <span class="text-danger">{{ $message }}</span> @enderror
                             </div>

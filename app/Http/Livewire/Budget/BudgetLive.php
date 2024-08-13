@@ -21,6 +21,15 @@ class BudgetLive extends Component
     public $period;
     public $note;
 
+    public $input_search = [];
+    public $search = [
+        'category' => '',
+        'period' => '',
+        'user' => '',
+        'amount_from' => '',
+        'amount_to' => '',
+    ];
+
     public function rules()
     {
         $rules = [
@@ -51,6 +60,7 @@ class BudgetLive extends Component
     public function mount()
     {
         $this->title = __('title.list_budget');
+        $this->input_search = $this->search;
 
         $objCategoryRepository = new CategoryRepository();
         $this->categories = $objCategoryRepository->getListCategories();
@@ -63,8 +73,9 @@ class BudgetLive extends Component
     public function render()
     {
         $objBudgetResitory = new BudgetRepository();
+        // dd($this->input_search);
         if (Auth::guard('user')->user()->role == ROLE_ADMIN) {
-            $this->budgets = $objBudgetResitory->getListBudgets();
+            $this->budgets = $objBudgetResitory->getListBudgets($this->input_search);
         } else {
             $this->budgets = $objBudgetResitory->getBudgetByUserId(Auth::guard('user')->user()->id);
         }
@@ -128,5 +139,21 @@ class BudgetLive extends Component
             'status' => $result['status'],
             'message' => $result['message'],
         ]);
+    }
+
+    public function filter()
+    {
+        $this->input_search = $this->search;
+    }
+
+    public function clear()
+    {
+        $this->input_search = [
+            'category' => '',
+            'period' => '',
+            'user' => '',
+            'amount_from' => '',
+            'amount_to' => '',
+        ];
     }
 }
