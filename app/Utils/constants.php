@@ -1,5 +1,13 @@
 <?php 
 
+// Pagination
+define('PER_PAGE', 10);
+define('PAGINATION', [
+    10 => 10,
+    50 => 50,
+    100 => 100,
+]);
+
 // User roles
 define('ROLE_ADMIN', 0);
 define('ROLE_USER', 1);

@@ -7,3 +7,24 @@
     color: #5a5c69;
     text-decoration: none;
 }
+
+.select-pagination {
+    width: 100px !important;
+    display: inline-block !important;
+}
+
+.sorting {
+    position: relative;
+    cursor: pointer;
+}
+
+.sorting::before,
+.sorting::after {
+    content: "↑↓";
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: gray;
+}

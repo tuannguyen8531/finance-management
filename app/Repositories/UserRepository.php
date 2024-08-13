@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Hash;
 
 class UserRepository
 {
-    public function getListUsers()
+    public function getListUsers($pagination, $sortField, $sortDirection)
     {
         $objUser = new User();
-        $result = $objUser->getListUsers();
+        $result = $objUser->getListUsers($pagination, $sortField, $sortDirection);
 
         return $result;
     }

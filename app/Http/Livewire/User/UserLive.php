@@ -4,12 +4,16 @@ namespace App\Http\Livewire\User;
 
 use App\Repositories\UserRepository;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserLive extends Component
 {
+    use WithPagination;
+    protected $paginationTheme = 'bootstrap';
+    public $pagination = PER_PAGE;
+    public $sortField = 'id';
+    public $sortDirection = 'desc';
     public $title;
-    public $users;
-    
 
     public function mount()
     {
@@ -19,9 +23,12 @@ class UserLive extends Component
     public function render()
     {
         $objUser = new UserRepository();
-        $this->users = $objUser->getListUsers();
+        $users = $objUser->getListUsers($this->pagination, $this->sortField, $this->sortDirection);
 
-        return view('livewire.user.list_user');
+        return view('livewire.user.list_user', [
+            'users' => $users,
+            'title' => $this->title,
+        ]);
     }
 
     public function delete($id)
@@ -33,5 +40,16 @@ class UserLive extends Component
             'status' => $result['status'],
             'message' => $result['message'],
         ]);
+    }
+
+    public function sortBy($field)
+    {
+        if ($this->sortField === $field) {
+            $this->sortDirection = $this->sortDirection === 'asc' ? 'desc' : 'asc';
+        } else {
+            $this->sortDirection = 'asc';
+        }
+
+        $this->sortField = $field;
     }
 }

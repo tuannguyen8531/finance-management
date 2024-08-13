@@ -37,7 +37,7 @@
     <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+    <!-- <script src="{{ asset('js/demo/datatables-demo.js') }}"></script> -->
     {{-- <script src="{{ asset('js/demo/chart-bar-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
     <script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
@@ -60,7 +60,17 @@
                 setTimeout(function () {
                     $('#alert-message').fadeOut();
                 }, 3000);
-            }
+            };
+
+            $('.id-sort').on('click', function () {
+                if ($(this).hasClass('sort-asc')) {
+                    console.log('Changing from sort-asc to sort-desc');
+                    $(this).removeClass('sort-asc').addClass('sort-desc');
+                } else {
+                    console.log('Changing from sort-desc to sort-asc');
+                    $(this).removeClass('sort-desc').addClass('sort-asc');
+                }
+            });
         });
     </script>
 

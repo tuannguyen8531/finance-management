@@ -73,7 +73,6 @@ class BudgetLive extends Component
     public function render()
     {
         $objBudgetResitory = new BudgetRepository();
-        // dd($this->input_search);
         if (Auth::guard('user')->user()->role == ROLE_ADMIN) {
             $this->budgets = $objBudgetResitory->getListBudgets($this->input_search);
         } else {
