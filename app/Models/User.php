@@ -47,11 +47,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    function getListUsers()
+    function getListUsers($pagination, $sortField, $sortDirection)
     {
         $result = User::where($this->table . '.deleted_flg', DELETED_DISABLED)
-        ->orderBy($this->table . '.id', 'desc')
-        ->get();
+        ->orderBy($sortField, $sortDirection)
+        ->paginate($pagination);
         
         return $result;
     }

@@ -12,4 +12,7 @@ return [
     'list_category' => 'List Category',
     'add_category' => 'Add Category',
     'detail_category' => 'Edit Category',
+
+    // Budget
+    'list_budget' => 'List Budget',
 ];

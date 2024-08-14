@@ -10,8 +10,8 @@
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold text-primary">List user</h6>
-            <a href="{{ route('user.add') }}" class="btn btn-primary btn-sm float-right">Add User</a>
+            <h6 class="m-0 font-weight-bold text-primary">List tag</h6>
+            <a class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#tagModal" data-title="add">Add Tag</a>
         </div>
         <div class="card-body">
             <div class="row">
@@ -34,31 +34,31 @@
                             <th class="text-center gap-1 sorting" style="width: 5% !important;" wire:click="sortBy('id')">
                                 <div class="sortable gap-1"><span>#</span>
                             </th>
-                            <th style="width: 20%;">Name</th>
-                            <th style="width: 20%;">Username</th>
-                            <th style="width: 20%;">Email</th>
-                            <th style="width: 15%;" class="gap-1 sorting" wire:click="sortBy('balance')">
-                                <div class="sortable gap-1"><span>Balance</span>
-                            </th>
-                            <th style="width: 10%;">Role</th>
+                            <th style="width: 15%;">Name</th>
+                            <th style="width: 15%;">Code</th>
+                            <th style="width: 55%;">Description</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($tags as $tag)
                             <tr>
-                                <td class="text-center">{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->username }}</td>
-                                <td>{{ $user->email }}</td>
-                                <td>
-                                    {{ number_format($user->balance) }}
-                                    <span class="float-right">VND</span>
+                                <td class="text-center">{{ $tag->id }}</td>
+                                <td>{{ $tag->name }}</td>
+                                <td>{{ $tag->code }}</td>
+                                <td>{{ $tag->description }}</td>
                                 </td>
-                                <td>{{ getRole($user->role) }}</td>
                                 <td class="text-center">
-                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-success btn-sm px-3">Edit</a>
-                                    <a class="btn btn-danger btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-idDelete="{{ $user->id }}" data-title="{{ $user->name }}">Delete</a>
+                                    <a class="btn btn-success btn-sm px-3" 
+                                        data-toggle="modal" 
+                                        data-target="#tagModal" 
+                                        data-title="edit"
+                                        data-id="{{ $tag->id }}"
+                                        data-name="{{ $tag->name }}"
+                                        data-code="{{ $tag->code }}"
+                                        data-description="{{ $tag->description }}">Edit
+                                    </a> 
+                                    <a class="btn btn-danger btn-sm btn-delete" data-toggle="modal" data-target="#deleteModal" data-idDelete="{{ $tag->id }}" data-title="{{ $tag->name }}">Delete</a>
                                 </td>
                             </tr>
                         @endforeach
@@ -67,16 +67,17 @@
             </div>
             <div class="row">
                 <div class="col-sm-12 col-md-5">
-                    <p>Showing {{ $users->firstItem() }} to {{ $users->lastItem() }} of {{ $users->total() }} entries</p>
+                    <p>Showing {{ $tags->firstItem() }} to {{ $tags->lastItem() }} of {{ $tags->total() }} entries</p>
                 </div>
                 <div class="col-sm-12 col-md-7">
-                    {{ $users->links() }}
+                    {{ $tags->links() }}
                 </div>
             </div>
         </div>
     </div>
 
     @include('components.modals.delete')
+    @include('components.modals.tag')
 </div>
 
 @section('script')

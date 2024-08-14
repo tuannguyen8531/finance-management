@@ -1,5 +1,13 @@
 <?php 
 
+// Pagination
+define('PER_PAGE', 10);
+define('PAGINATION', [
+    10 => 10,
+    50 => 50,
+    100 => 100,
+]);
+
 // User roles
 define('ROLE_ADMIN', 0);
 define('ROLE_USER', 1);
@@ -9,17 +17,24 @@ define('DELETED_DISABLED', 0);
 define('DELETED_ENABLED', 1);
 
 // Category types
-define('CATEGORY_EXPENDITURE', 0);
-define('CATEGORY_INCOME', 1);
-define('CATEGORY_OTHER', 2);
+define('CATEGORY_EXPENDITURE', 1);
+define('CATEGORY_INCOME', 2);
+define('CATEGORY_OTHER', 3);
 
 // Transaction types
-define('TRANSACTION_EXPENDITURE', 0);
-define('TRANSACTION_INCOME', 1);
+define('TRANSACTION_EXPENDITURE', 1);
+define('TRANSACTION_INCOME', 2);
 
 // Period types
-define('PERIOD_DAY', 0);
-define('PERIOD_WEEK', 1);
-define('PERIOD_MONTH', 2);
-define('PERIOD_YEAR', 3);
-define('PERIOD_ONETIME', 4);
+define('PERIOD_DAY', 1);
+define('PERIOD_WEEK', 2);
+define('PERIOD_MONTH', 3);
+define('PERIOD_YEAR', 4);
+define('PERIOD_ONETIME', 5);
+define('PERIOD', [
+    PERIOD_DAY => 'Daily',
+    PERIOD_WEEK => 'Weekly',
+    PERIOD_MONTH => 'Monthly',
+    PERIOD_YEAR => 'Annually',
+    PERIOD_ONETIME => 'One-time',
+]);

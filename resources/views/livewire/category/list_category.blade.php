@@ -14,11 +14,26 @@
             <a href="{{ route('category.add') }}" class="btn btn-primary btn-sm float-right">Add Category</a>
         </div>
         <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="d-flex mb-3 align-items-center">
+                        <label class="mb-0 mr-1">Show</label>
+                        <select wire:model="pagination" id="pagination" class="custom-select custom-select-sm form-control form-control-sm select-pagination">
+                            @foreach (PAGINATION as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                        <label class="mb-0 ml-1">entries</label>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th class="text-center" style="width: 5% !important;">#</th>
+                            <th class="text-center gap-1 sorting" style="width: 5% !important;" wire:click="sortBy('id')">
+                                <div class="sortable gap-1"><span>#</span>
+                            </th>
                             <th style="width: 15%;">Name</th>
                             <th style="width: 10%;">Type</th>
                             <th style="width: 60%;">Description</th>
@@ -42,8 +57,26 @@
                     </tbody>
                 </table>
             </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <p>Showing {{ $categories->firstItem() }} to {{ $categories->lastItem() }} of {{ $categories->total() }} entries</p>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    {{ $categories->links() }}
+                </div>
+            </div>
         </div>
     </div>
 
     @include('components.modals.delete')
 </div>
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#pagination').on('change', function (e) {
+                @this.set('pagination', e.target.value);
+            });
+        });
+    </script>
+@endsection

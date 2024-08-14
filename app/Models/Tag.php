@@ -7,19 +7,20 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
-class Category extends Model {
+class Tag extends Model 
+{
     use HasFactory, Notifiable;
 
-    protected $table = 'categories';
+    protected $table = 'tags';
     public $timestamps = true;
 
     protected $fillable = [
         'name',
+        'code',
         'description',
-        'type',
     ];
 
-    function getListCategories($pagination, $sortField, $sortDirection)
+    function getListTags($pagination, $sortField, $sortDirection)
     {
         $result = DB::table($this->table)
         ->where('deleted_flg', DELETED_DISABLED)
@@ -29,16 +30,17 @@ class Category extends Model {
         return $result;
     }
 
-    function getAllCategories()
+    function getAllTags()
     {
         $result = DB::table($this->table)
         ->where('deleted_flg', DELETED_DISABLED)
+        ->orderBy('name', 'asc')
         ->get();
         
         return $result;
     }
 
-    function getCategoryById($id)
+    function getTagById($id)
     {
         $result = DB::table($this->table)
         ->where('id', $id)
@@ -48,7 +50,7 @@ class Category extends Model {
         return $result;
     }
 
-    function insertCategory($data)
+    function insertTag($data)
     {
         $data['created_at'] = \Carbon\Carbon::now()->toDateTimeString();
         $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
@@ -56,7 +58,7 @@ class Category extends Model {
         return DB::table($this->table)->insert($data);
     }
 
-    function updateCategory($id, $data)
+    function updateTag($id, $data)
     {
         $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
         
@@ -65,11 +67,11 @@ class Category extends Model {
         ->update($data);
     }
 
-    function deleteCategory($id)
+    function deleteTag($id)
     {
         $data['deleted_flg'] = DELETED_ENABLED;
         
-        DB::table($this->table)
+        return DB::table($this->table)
         ->where('id', $id)
         ->update($data);
     }

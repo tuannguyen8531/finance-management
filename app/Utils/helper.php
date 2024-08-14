@@ -20,3 +20,26 @@ function getCategoryType($type)
 
     return $types[$type];
 }
+
+function getTransactionType($type)
+{
+    $types = [
+        TRANSACTION_EXPENDITURE => 'Expenditure',
+        TRANSACTION_INCOME => 'Income',
+    ];
+
+    return $types[$type];
+}
+
+function getPeriodType($type)
+{
+    $types = [
+        PERIOD_DAY => 'Daily',
+        PERIOD_WEEK => 'Weekly',
+        PERIOD_MONTH => 'Monthly',
+        PERIOD_YEAR => 'Annually',
+        PERIOD_ONETIME => 'One-time',
+    ];
+
+    return $types[$type];
+}
