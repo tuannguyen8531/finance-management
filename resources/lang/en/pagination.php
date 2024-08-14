@@ -15,5 +15,13 @@ return [
 
     'previous' => '&laquo; Previous',
     'next' => 'Next &raquo;',
+    'showing' => 'Showing',
+    'to' => 'to',
+    'of' => 'of',
+    'results' => 'results',
+    'no_results' => 'No results',
+    'no_results_found' => 'No results found',
+    'no_results_found_in_trash' => 'No results found in trash',
+    'entries' => 'entries',
 
 ];

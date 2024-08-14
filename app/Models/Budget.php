@@ -22,7 +22,7 @@ class Budget extends Model
         'note',
     ];
 
-    function getListBudgets($input_search)
+    function getListBudgets($input_search, $pagination, $sortField, $sortDirection)
     {
         $result = DB::table($this->table)
         ->join('categories', 'budgets.category_id', '=', 'categories.id')
@@ -47,9 +47,9 @@ class Budget extends Model
             $result = $result->where('budgets.amount', '<=', $input_search['amount_to']);
         }
 
-        $result = $result->orderBy('budgets.id', 'desc')
+        $result = $result->orderBy('budgets.' . $sortField, $sortDirection)
         ->select(['budgets.*', 'categories.name as category_name', 'users.username as user_username'])
-        ->get();
+        ->paginate($pagination);
         
         return $result;
     }
@@ -64,15 +64,15 @@ class Budget extends Model
         return $result;
     }
 
-    function getBudgetByUserId($userId)
+    function getListBudgetsByUserId($userId, $pagination, $sortField, $sortDirection)
     {
         $result = DB::table($this->table)
         ->join('categories', 'budgets.category_id', '=', 'categories.id')
         ->where('user_id', $userId)
         ->where('budgets.deleted_flg', DELETED_DISABLED)
-        ->orderBy('budgets.id', 'desc')
+        ->orderBy('budgets.' . $sortField, $sortDirection)
         ->select(['budgets.*', 'categories.name as category_name'])
-        ->get();
+        ->paginate($pagination);
 
         return $result;
     }

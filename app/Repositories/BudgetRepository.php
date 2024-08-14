@@ -6,10 +6,10 @@ use App\Models\Budget;
 
 class BudgetRepository
 {
-    public function getListBudgets($input_search)
+    public function getListBudgets($input_search, $pagination, $sortField, $sortDirection)
     {
         $objBudget = new Budget();
-        $result = $objBudget->getListBudgets($input_search);
+        $result = $objBudget->getListBudgets($input_search, $pagination, $sortField, $sortDirection);
 
         return $result;
     }
@@ -22,10 +22,10 @@ class BudgetRepository
         return $result;
     }
 
-    public function getBudgetByUserId($userId)
+    public function getListBudgetsByUserId($userId, $pagination, $sortField, $sortDirection)
     {
         $objBudget = new Budget();
-        $result = $objBudget->getBudgetByUserId($userId);
+        $result = $objBudget->getListBudgetsByUserId($$userId, $pagination, $sortField, $sortDirection);
 
         return $result;
     }

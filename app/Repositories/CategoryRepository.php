@@ -6,10 +6,18 @@ use App\Models\Category;
 
 class CategoryRepository
 {
-    public function getListCategories()
+    public function getListCategories($pagination, $sortField, $sortDirection)
     {
         $objCategory = new Category();
-        $result = $objCategory->getListCategories();
+        $result = $objCategory->getListCategories($pagination, $sortField, $sortDirection);
+
+        return $result;
+    }
+
+    public function getAllCategories()
+    {
+        $objCategory = new Category();
+        $result = $objCategory->getAllCategories();
 
         return $result;
     }

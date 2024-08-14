@@ -19,11 +19,20 @@ class Category extends Model {
         'type',
     ];
 
-    function getListCategories()
+    function getListCategories($pagination, $sortField, $sortDirection)
     {
         $result = DB::table($this->table)
         ->where('deleted_flg', DELETED_DISABLED)
-        ->orderBy('id', 'desc')
+        ->orderBy($sortField, $sortDirection)
+        ->paginate($pagination);
+        
+        return $result;
+    }
+
+    function getAllCategories()
+    {
+        $result = DB::table($this->table)
+        ->where('deleted_flg', DELETED_DISABLED)
         ->get();
         
         return $result;

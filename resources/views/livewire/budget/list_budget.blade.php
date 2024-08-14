@@ -76,15 +76,30 @@
             <h6 class="m-0 font-weight-bold text-primary">List budget</h6>
             <a class="btn btn-primary btn-sm float-right" data-toggle="modal" data-target="#budgetModal" data-title="add">Add Budget</a>
         </div>
-        <div class="card-body" wire:ignore>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <div class="d-flex mb-3 align-items-center">
+                        <label class="mb-0 mr-1">Show</label>
+                        <select wire:model="pagination" id="pagination" class="custom-select custom-select-sm form-control form-control-sm select-pagination">
+                            @foreach (PAGINATION as $key => $value)
+                                <option value="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                        <label class="mb-0 ml-1">entries</label>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     @if (Auth::guard('user')->user()->role != ROLE_ADMIN)
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 5% !important;">#</th>
+                                <th class="text-center gap-1 sorting" style="width: 5% !important;" wire:click="sortBy('id')">
+                                    <div class="sortable gap-1"><span>#</span>
+                                </th>
                                 <th style="width: 10%;">Category</th>
-                                <th style="width: 15%;">Amount</th>
+                                <th style="width: 15%;" class="gap-1 sorting" wire:click="sortBy('amount')">Amount</th>
                                 <th style="width: 10%;">Period</th>
                                 <th style="width: 50%;">Note</th>
                                 <th>Action</th>
@@ -118,12 +133,14 @@
                     @else
                         <thead>
                             <tr>
-                                <th class="text-center" style="width: 5% !important;">#</th>
+                                <th class="text-center gap-1 sorting" style="width: 5% !important;" wire:click="sortBy('id')">
+                                    <div class="sortable gap-1"><span>#</span>
+                                </th>
                                 <th style="width: 10%;">Category</th>
                                 <th style="width: 15%;">User</th>
-                                <th style="width: 15%;">Amount</th>
+                                <th style="width: 15%;" class="gap-1 sorting" wire:click="sortBy('amount')">Amount</th>
                                 <th style="width: 10%;">Period</th>
-                                <th>Note</th>
+                                <th style="width: 35%;">Note</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -161,9 +178,27 @@
                     @endif
                 </table>
             </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-5">
+                    <p>Showing {{ $budgets->firstItem() }} to {{ $budgets->lastItem() }} of {{ $budgets->total() }} entries</p>
+                </div>
+                <div class="col-sm-12 col-md-7">
+                    {{ $budgets->links() }}
+                </div>
+            </div>
         </div>
     </div>
 
     @include('components.modals.delete')
     @include('components.modals.budget')
 </div>
+
+@section('script')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            $('#pagination').on('change', function (e) {
+                @this.set('pagination', e.target.value);
+            });
+        });
+    </script>
+@endsection
