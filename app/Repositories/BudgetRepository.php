@@ -25,7 +25,7 @@ class BudgetRepository
     public function getListBudgetsByUserId($userId, $pagination, $sortField, $sortDirection)
     {
         $objBudget = new Budget();
-        $result = $objBudget->getListBudgetsByUserId($$userId, $pagination, $sortField, $sortDirection);
+        $result = $objBudget->getListBudgetsByUserId($userId, $pagination, $sortField, $sortDirection);
 
         return $result;
     }

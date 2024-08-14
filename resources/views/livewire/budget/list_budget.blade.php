@@ -95,9 +95,7 @@
                     @if (Auth::guard('user')->user()->role != ROLE_ADMIN)
                         <thead>
                             <tr>
-                                <th class="text-center gap-1 sorting" style="width: 5% !important;" wire:click="sortBy('id')">
-                                    <div class="sortable gap-1"><span>#</span>
-                                </th>
+                                <th class="text-center" style="width: 5% !important;">#</th>
                                 <th style="width: 10%;">Category</th>
                                 <th style="width: 15%;" class="gap-1 sorting" wire:click="sortBy('amount')">Amount</th>
                                 <th style="width: 10%;">Period</th>
@@ -108,7 +106,7 @@
                         <tbody>
                             @foreach ($budgets as $budget)
                                 <tr>
-                                    <td class="text-center">{{ $budget->id }}</td>
+                                    <td class="text-center">{{ $loop->iteration }}</td>
                                     <td>{{ $budget->category_name }}</td>
                                     <td>{{ number_format($budget->amount) }} VND</td>
                                     <td>{{ getPeriodType($budget->period) }}</td>
