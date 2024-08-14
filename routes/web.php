@@ -31,4 +31,7 @@ Route::middleware('checklogin')->group(function () {
 
     // Budget
     Route::get('/budget', \App\Http\Livewire\Budget\BudgetLive::class)->name('budget');
+
+    // Tag
+    Route::get('/tag', \App\Http\Livewire\Tag\TagLive::class)->name('tag');
 });
