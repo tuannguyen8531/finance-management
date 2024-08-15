@@ -16,7 +16,6 @@ class TagLive extends Component
     public $pagination = PER_PAGE;
     public $sortField = 'id';
     public $sortDirection = 'desc';
-    public $title;
     public $input_search = [];
     public $search = [
         'name' => '',
@@ -58,7 +57,7 @@ class TagLive extends Component
 
     public function mount()
     {
-        $this->title = __('tag.title');
+        
     }
 
     public function render(TagRepository $tagRepository)

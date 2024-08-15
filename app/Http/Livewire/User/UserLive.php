@@ -13,11 +13,10 @@ class UserLive extends Component
     public $pagination = PER_PAGE;
     public $sortField = 'id';
     public $sortDirection = 'desc';
-    public $title;
 
     public function mount()
     {
-        $this->title = __('title.list_user');
+        
     }
 
     public function render()
@@ -27,7 +26,6 @@ class UserLive extends Component
 
         return view('livewire.user.list_user', [
             'users' => $users,
-            'title' => $this->title,
         ]);
     }
 

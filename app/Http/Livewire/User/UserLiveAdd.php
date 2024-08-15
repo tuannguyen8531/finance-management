@@ -6,15 +6,16 @@ use App\Repositories\UserRepository;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
-class UserLiveAdd extends Component {
-    public $title;
+class UserLiveAdd extends Component 
+{
     public $name;
     public $username;
     public $email;
     public $password;
     public $balance;
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'name' => 'required',
             'username' => [
@@ -35,7 +36,8 @@ class UserLiveAdd extends Component {
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'name.required' => __('message.field_required'),
             'username.required' => __('message.field_required'),
@@ -50,15 +52,18 @@ class UserLiveAdd extends Component {
         ];
     }
 
-    public function mount() {
-        $this->title = __('title.add_user');
+    public function mount()
+    {
+        
     }
 
-    public function render() {
+    public function render()
+    {
         return view('livewire.user.add_user');
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
 
         $input = [

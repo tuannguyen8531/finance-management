@@ -16,7 +16,6 @@ class BudgetLive extends Component
     public $pagination = PER_PAGE;
     public $sortField = 'id';
     public $sortDirection = 'desc';
-    public $title;
     public $categories;
     public $budgetId;
     public $userId;
@@ -64,7 +63,6 @@ class BudgetLive extends Component
 
     public function mount()
     {
-        $this->title = __('title.list_budget');
         $this->input_search = $this->search;
 
         $objCategoryRepository = new CategoryRepository();
@@ -86,7 +84,6 @@ class BudgetLive extends Component
 
         return view('livewire.budget.list_budget', [
             'budgets' => $budgets,
-            'title' => $this->title,
         ]);
     }
 
@@ -104,7 +101,6 @@ class BudgetLive extends Component
     public function store()
     {
         $this->validate();
-
 
         $objBudgetResitory = new BudgetRepository();
 

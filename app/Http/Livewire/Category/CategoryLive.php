@@ -13,12 +13,11 @@ class CategoryLive extends Component
     public $pagination = PER_PAGE;
     public $sortField = 'id';
     public $sortDirection = 'desc';
-    public $title;
 
 
     public function mount()
     {
-        $this->title = __('title.list_category');
+
     }
 
     public function render()
@@ -28,7 +27,6 @@ class CategoryLive extends Component
 
         return view('livewire.category.list_category', [
             'categories' => $categories,
-            'title' => $this->title,
         ]);
     }
 

@@ -8,7 +8,6 @@ use Illuminate\Validation\Rule;
 
 class CategoryLiveAdd extends Component
 {
-    public $title;
     public $name;
     public $type;
     public $description;
@@ -33,7 +32,7 @@ class CategoryLiveAdd extends Component
 
     public function mount()
     {
-        $this->title = __('title.add_category');
+        
     }
 
     public function render()

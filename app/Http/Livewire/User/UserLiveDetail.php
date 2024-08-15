@@ -8,7 +8,6 @@ use Illuminate\Validation\Rule;
 
 class UserLiveDetail extends Component
 {
-    public $title;
     public $user;
     public $name;
     public $username;
@@ -18,7 +17,8 @@ class UserLiveDetail extends Component
     public $newPassword;
     public $confirmPassword;
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'name' => 'required',
             'username' => [
@@ -41,7 +41,8 @@ class UserLiveDetail extends Component
         ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
             'name.required' => __('message.field_required'),
             'username.required' => __('message.field_required'),
@@ -60,8 +61,6 @@ class UserLiveDetail extends Component
 
     public function mount($id)
     {
-        $this->title = __('title.detail_user');
-
         $objUser = new UserRepository();
         $this->user = $objUser->getUserById($id);
         if (!$this->user) {
@@ -80,7 +79,8 @@ class UserLiveDetail extends Component
         return view('livewire.user.edit_user');
     }
 
-    public function save() {
+    public function save()
+    {
         $this->validate();
 
         if (isset($this->newPassword) && !empty($this->newPassword)) {

@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Notifications\Notifiable;
 
-class Category extends Model {
+class Category extends Model 
+{
     use HasFactory, Notifiable;
 
     protected $table = 'categories';

@@ -7,7 +7,6 @@ use Livewire\Component;
 
 class CategoryLiveDetail extends Component
 {
-    public $title;
     public $category;
     public $name;
     public $type;
@@ -31,8 +30,6 @@ class CategoryLiveDetail extends Component
 
     public function mount($id)
     {
-        $this->title = __('title.detail_category');
-
         $objCategory = new CategoryRepository();
         $this->category = $objCategory->getCategoryById($id);
         if (!$this->category) {

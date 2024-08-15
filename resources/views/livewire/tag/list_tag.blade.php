@@ -1,5 +1,5 @@
 <div>
-    <h1 class="h3 mb-4 text-gray-800">{{ $title }}</h1>
+    <h1 class="h3 mb-4 text-gray-800">{{ __('form.list_tag') }}</h1>
 
     @if (Session::has('message'))
         <div id="alert-message" class="alert alert-{{ Session::get('status') }}" role="alert">
