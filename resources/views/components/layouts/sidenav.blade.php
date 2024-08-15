@@ -51,6 +51,7 @@
         </a>
         <div id="collapseSummary" class="collapse" aria-labelledby="headingSummary" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
+                <a class="collapse-item" href="">Daily Log</a>
                 <a class="collapse-item" href="">Monthly Summary</a>
             </div>
         </div>

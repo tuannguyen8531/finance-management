@@ -15,7 +15,7 @@ class TagLive extends Component
     protected $paginationTheme = 'bootstrap';
     public $pagination = PER_PAGE;
     public $sortField = 'id';
-    public $sortDirection = 'desc';
+    public $sortDirection = 'asc';
     public $input_search = [];
     public $search = [
         'name' => '',
