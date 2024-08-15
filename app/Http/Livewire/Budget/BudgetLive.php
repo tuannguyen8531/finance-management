@@ -98,7 +98,7 @@ class BudgetLive extends Component
         ]);
     }
 
-    public function store()
+    public function save()
     {
         $this->validate();
 

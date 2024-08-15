@@ -8,7 +8,7 @@
                     <span aria-hidden="true">×</span>
                 </button>
             </div>
-            <form wire:submit.prevent="store">
+            <form wire:submit.prevent="save">
                 <div class="modal-body">
                     <input type="hidden" id="submitId" wire:model.live="budgetId">
                     <div class="row">

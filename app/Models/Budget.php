@@ -132,8 +132,11 @@ class Budget extends Model
 
     function deleteBudget($id)
     {
+        $data['deleted_flg'] = DELETED_ENABLED;
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
+        
         return DB::table($this->table)
         ->where('id', $id)
-        ->update(['deleted_flg' => DELETED_ENABLED]);
+        ->update($data);
     }
 }

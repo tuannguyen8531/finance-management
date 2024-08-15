@@ -96,8 +96,9 @@ class User extends Authenticatable
     function deleteUser($id)
     {
         $data['deleted_flg'] = DELETED_ENABLED;
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
         
-        DB::table($this->table)
+        return DB::table($this->table)
         ->where('id', $id)
         ->update($data);
     }

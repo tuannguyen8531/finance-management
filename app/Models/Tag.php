@@ -70,6 +70,7 @@ class Tag extends Model
     function deleteTag($id)
     {
         $data['deleted_flg'] = DELETED_ENABLED;
+        $data['updated_at'] = \Carbon\Carbon::now()->toDateTimeString();
         
         return DB::table($this->table)
         ->where('id', $id)
