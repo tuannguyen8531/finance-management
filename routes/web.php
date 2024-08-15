@@ -21,13 +21,13 @@ Route::middleware('checklogin')->group(function () {
 
     // User
     Route::get('/user', \App\Http\Livewire\User\UserLive::class)->name('user');
-    Route::get('/user/add', \App\Http\Livewire\User\UserLiveAdd::class)->name('user.add');
-    Route::get('/user/{id}', \App\Http\Livewire\User\UserLiveDetail::class)->name('user.edit');
+    Route::get('/user/add', \App\Http\Livewire\User\UserAddLive::class)->name('user.add');
+    Route::get('/user/{id}', \App\Http\Livewire\User\UserDetailLive::class)->name('user.edit');
 
     // Category
     Route::get('/category', \App\Http\Livewire\Category\CategoryLive::class)->name('category');
-    Route::get('/category/add', \App\Http\Livewire\Category\CategoryLiveAdd::class)->name('category.add');
-    Route::get('/category/{id}', \App\Http\Livewire\Category\CategoryLiveDetail::class)->name('category.edit');
+    Route::get('/category/add', \App\Http\Livewire\Category\CategoryAddLive::class)->name('category.add');
+    Route::get('/category/{id}', \App\Http\Livewire\Category\CategoryDetailLive::class)->name('category.edit');
 
     // Budget
     Route::get('/budget', \App\Http\Livewire\Budget\BudgetLive::class)->name('budget');

@@ -6,7 +6,7 @@ use App\Repositories\CategoryRepository;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
-class CategoryLiveAdd extends Component
+class CategoryAddLive extends Component
 {
     public $name;
     public $type;

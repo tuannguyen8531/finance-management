@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Category;
 use App\Repositories\CategoryRepository;
 use Livewire\Component;
 
-class CategoryLiveDetail extends Component
+class CategoryDetailLive extends Component
 {
     public $category;
     public $name;

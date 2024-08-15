@@ -6,7 +6,7 @@ use App\Repositories\UserRepository;
 use Livewire\Component;
 use Illuminate\Validation\Rule;
 
-class UserLiveAdd extends Component 
+class UserAddLive extends Component 
 {
     public $name;
     public $username;
