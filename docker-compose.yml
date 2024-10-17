@@ -34,12 +34,12 @@ services:
 
   phpmyadmin:
     image: phpmyadmin
+    container_name: finance-phpmyadmin
     restart: always
     ports:
       - 8188:80
     environment:
       PMA_HOST: db
-      # PMA_USER: ${DB_USERNAME}
       PMA_PASSWORD: ${DB_PASSWORD}
     networks:
       - finance
@@ -59,4 +59,4 @@ services:
 networks:
   finance:
     driver: bridge
-
+    name: finance-network
